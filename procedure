@@ -1,0 +1,28 @@
+delimiter $$
+create procedure departament_manipulation(
+in opcao int,
+in nDnumber int,
+in nDname varchar(20)
+)
+begin
+    
+	case opcao
+		when 1 then
+			insert into departament(Dnumber, Dname,Dept_create_date) values (nDnumber, nDname, CURDATE());
+            select * from departament;
+		when 2 then 
+			delete from departament where Dnumber = nDnumber;
+            select * from departament;
+		when 3 then
+			update departament set Dname = nDname where Dnumber = nDnumber;
+            select * from departament;
+		else
+			select * from departament;
+	END CASE;
+end $$
+delimiter ;
+--drop procedure departament_manipulation;
+call departament_manipulation(1,2,'CEF');
+call departament_manipulation(1,3,'Financeiro');
+call departament_manipulation(2,3,NULL);
+call departament_manipulation(3,2,'New Departament');
